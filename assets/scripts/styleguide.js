@@ -5,10 +5,18 @@
 
   let src = null;
 
+  if (window.location.hash) {
+    const activeNav = document.querySelector(`a[href="${window.location.hash}"]`);
+    src = activeNav.getAttribute('data-src');
+    iframe.setAttribute('src', src);
+
+    activeNav.classList.add('is-active');
+    reloadBtn.classList.add('is-visible');
+  }
+
   navs.forEach((nav) => {
     nav.addEventListener('click', (e) => {
-      e.preventDefault();
-      src = nav.getAttribute('href');
+      src = nav.getAttribute('data-src');
       iframe.setAttribute('src', src);
 
       const activeNav = document.querySelector('.sidebar ul li a.is-active');
